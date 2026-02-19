@@ -2,11 +2,23 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.exceptions import NotFound
+from bson import ObjectId
+from bson.errors import InvalidId
 from .models import User, Team, Activity, Leaderboard, Workout
 from .serializers import (
     UserSerializer, TeamSerializer, ActivitySerializer,
     LeaderboardSerializer, WorkoutSerializer
 )
+
+
+def get_object_by_id(queryset, id_str):
+    """Look up a Djongo/MongoDB document by its ObjectId string."""
+    try:
+        obj = queryset.get(_id=ObjectId(id_str))
+    except (InvalidId, queryset.model.DoesNotExist):
+        raise NotFound(detail=f"Object with id '{id_str}' not found.")
+    return obj
 
 
 @api_view(['GET'])
@@ -29,6 +41,12 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        obj = get_object_by_id(self.get_queryset(), self.kwargs['_id'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class TeamViewSet(viewsets.ModelViewSet):
@@ -37,6 +55,12 @@ class TeamViewSet(viewsets.ModelViewSet):
     """
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        obj = get_object_by_id(self.get_queryset(), self.kwargs['_id'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class ActivityViewSet(viewsets.ModelViewSet):
@@ -45,6 +69,12 @@ class ActivityViewSet(viewsets.ModelViewSet):
     """
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        obj = get_object_by_id(self.get_queryset(), self.kwargs['_id'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class LeaderboardViewSet(viewsets.ModelViewSet):
@@ -53,6 +83,12 @@ class LeaderboardViewSet(viewsets.ModelViewSet):
     """
     queryset = Leaderboard.objects.all()
     serializer_class = LeaderboardSerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        obj = get_object_by_id(self.get_queryset(), self.kwargs['_id'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class WorkoutViewSet(viewsets.ModelViewSet):
@@ -61,3 +97,9 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     """
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
+    lookup_field = '_id'
+
+    def get_object(self):
+        obj = get_object_by_id(self.get_queryset(), self.kwargs['_id'])
+        self.check_object_permissions(self.request, obj)
+        return obj

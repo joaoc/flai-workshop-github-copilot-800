@@ -1,0 +1,103 @@
+/* OctoFit Tracker — custom styles layered on top of Bootstrap */
+
+/* ── Brand colours ─────────────────────────────────────────── */
+:root {
+  --octofit-primary:   #0d6efd;
+  --octofit-dark:      #1a1d23;
+  --octofit-accent:    #20c997;
+  --octofit-light-bg:  #f8f9fa;
+}
+
+/* ── Global ─────────────────────────────────────────────────── */
+body {
+  background-color: var(--octofit-light-bg);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.octofit-navbar {
+  background-color: var(--octofit-dark) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+}
+
+.octofit-navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--octofit-accent) !important;
+}
+
+.octofit-navbar .nav-link {
+  color: rgba(255, 255, 255, .8) !important;
+  font-weight: 500;
+  transition: color .2s;
+}
+
+.octofit-navbar .nav-link:hover,
+.octofit-navbar .nav-link.active {
+  color: var(--octofit-accent) !important;
+}
+
+/* ── Page headings ───────────────────────────────────────────── */
+.page-heading {
+  border-left: 4px solid var(--octofit-accent);
+  padding-left: .75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* ── Hero / home ─────────────────────────────────────────────── */
+.octofit-hero {
+  background: linear-gradient(135deg, var(--octofit-dark) 0%, #2c3e50 100%);
+  color: #fff;
+  border-radius: .5rem;
+  padding: 3rem 2rem;
+}
+
+.octofit-hero h1 {
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.octofit-hero .accent {
+  color: var(--octofit-accent);
+}
+
+/* ── Tables ──────────────────────────────────────────────────── */
+.octofit-table thead {
+  background-color: var(--octofit-dark);
+  color: #fff;
+}
+
+.octofit-table tbody tr:hover {
+  background-color: rgba(32, 201, 151, .08);
+}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.octofit-card {
+  transition: transform .2s, box-shadow .2s;
+  border: 1px solid #dee2e6;
+}
+
+.octofit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+}
+
+.octofit-card .card-header {
+  background-color: var(--octofit-dark);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Badges ──────────────────────────────────────────────────── */
+.badge-beginner     { background-color: #20c997 !important; }
+.badge-intermediate { background-color: #fd7e14 !important; }
+.badge-advanced     { background-color: #dc3545 !important; }
+
+/* ── Loading spinner wrapper ─────────────────────────────────── */
+.octofit-loading {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
